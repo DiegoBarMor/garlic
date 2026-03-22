@@ -4,9 +4,10 @@
 #include "garlic.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////// GRAPHICS ///////////////////////////////////
+//////////////////////////////////// ASSETS ////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
+/////////////////////////////////////////////////////////// TEXTURES
 // -----------------------------------------------------------------------------
 void load_textures(unsigned int n) {
     for (GarlicTexture* gt = TEXTURES; gt < TEXTURES + n; gt++)
@@ -34,9 +35,8 @@ static Texture2D _load_texture_resize(GarlicTexture* gt) {
 }
 
 
-////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////// AUDIO /////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////// SFX
+bool SOUND_SFX_ON = true;
 
 // -----------------------------------------------------------------------------
 void load_sound_effects(unsigned int n) {
@@ -62,5 +62,27 @@ void play_sfx_random(unsigned int idx, unsigned int n_variants) {
     int choice = GetRandomValue(idx, idx + n_variants - 1);
     PlaySound(SOUND_EFFECTS[choice].sound);
 }
+
+
+/////////////////////////////////////////////////////////// MUSIC
+bool SOUND_BGM_ON = true;
+
+// -----------------------------------------------------------------------------
+void load_bg_music(unsigned int n) {
+    for (BGMusic* bgm = BGM_TRACKS; bgm < BGM_TRACKS + n; bgm++)
+        bgm->music = LoadMusicStream(bgm->path_music);
+}
+
+// -----------------------------------------------------------------------------
+void unload_bg_music(unsigned int n) {
+    for (BGMusic* bgm = BGM_TRACKS; bgm < BGM_TRACKS + n; bgm++)
+        UnloadMusicStream(bgm->music);
+}
+
+// -----------------------------------------------------------------------------
+Music* getp_bg_music(unsigned int idx) {
+    return &BGM_TRACKS[idx].music;
+}
+
 
 // -----------------------------------------------------------------------------
