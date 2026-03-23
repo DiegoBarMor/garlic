@@ -4,7 +4,7 @@
 #include "garlic.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////// ASSETS ////////////////////////////////////
+//////////////////////////////////   ASSETS   /////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////// TEXTURES
@@ -82,6 +82,56 @@ void unload_bg_music(unsigned int n) {
 // -----------------------------------------------------------------------------
 Music* getp_bg_music(unsigned int idx) {
     return &BGM_TRACKS[idx].music;
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////   UI   ////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////// CENTERED TEXT
+// -----------------------------------------------------------------------------
+void init_centered_text(CenteredText* ctext) {
+    ctext->text_size = MeasureTextEx(
+        GetFontDefault(), ctext->text, ctext->font_size, 1
+    );
+}
+
+
+/////////////////////////////////////////////////////////// BUTTON
+// -----------------------------------------------------------------------------
+void init_buttons(unsigned int n) {
+    for (Button* btt = BUTTONS; btt < BUTTONS + n; btt++) {
+        btt->active = false;
+        btt->hovered = false;
+        init_centered_text(&btt->ctext);
+    }
+}
+
+// -----------------------------------------------------------------------------
+void update_buttons_hover(unsigned int n, Vector2 mouse_pos) {
+    for (Button* btt = BUTTONS; btt < BUTTONS + n; ++btt) {
+        if (!btt->active) {
+            btt->hovered = false;
+            continue;
+        };
+        Rectangle rect = {btt->pos.x, btt->pos.y, btt->size.x, btt->size.y};
+        btt->hovered = CheckCollisionPointRec(mouse_pos, rect);
+    }
+}
+
+// -----------------------------------------------------------------------------
+bool button_released(unsigned int idx) {
+    ////// note that hovered implies active (because of update_buttons_hover())
+    return (BUTTONS[idx].hovered && IsMouseButtonReleased(MOUSE_LEFT_BUTTON));
+}
+
+// -----------------------------------------------------------------------------
+bool button_released_with_sfx(unsigned int idx, unsigned int id_sfx) {
+    if (!button_released(idx)) return false;
+    play_sfx(id_sfx);
+    return true;
 }
 
 
