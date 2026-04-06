@@ -113,6 +113,7 @@ def main():
         target.save()
 
     print(f">>> GARLIC: Injected {len(targets)} target(s)")
+    print('\n'.join(f"... {target.path.name}: {target.tags}" for target in targets))
 
 
 ################################################################################

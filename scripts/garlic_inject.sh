@@ -13,6 +13,4 @@ if [ ! -d "vendors/garlic" ]; then
     bash scripts/garlic_fetch.sh
 fi
 
-cd vendors/garlic
-python3 injector.py ../../src ../../include inject
-cd - >/dev/null
+python3 vendors/garlic/injector.py src include inject

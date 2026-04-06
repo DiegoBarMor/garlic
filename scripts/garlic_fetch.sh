@@ -14,8 +14,4 @@ rm -rf vendors/garlic
 
 git clone --depth 1 https://github.com/DiegoBarMor/garlic.git vendors/garlic
 # cp -r ../../garlic vendors/garlic ### alternatively, if there's a local copy of GARLIC
-
-cd vendors
-mv garlic/garlic.c ./ # move up for convenience
-mv garlic/garlic.h ./
-cd - >/dev/null
+rm -rf vendors/garlic/.git
