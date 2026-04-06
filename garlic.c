@@ -40,13 +40,13 @@ bool SOUND_SFX_ON = true;
 
 // -----------------------------------------------------------------------------
 void load_sound_effects(unsigned int n) {
-    for (SoundEffect* sfx = SOUND_EFFECTS; sfx < SOUND_EFFECTS + n; sfx++)
+    for (GarlicSFX* sfx = SOUND_EFFECTS; sfx < SOUND_EFFECTS + n; sfx++)
         sfx->sound = LoadSound(sfx->path_sfx);
 }
 
 // -----------------------------------------------------------------------------
 void unload_sound_effects(unsigned int n) {
-    for (SoundEffect* sfx = SOUND_EFFECTS; sfx < SOUND_EFFECTS + n; sfx++)
+    for (GarlicSFX* sfx = SOUND_EFFECTS; sfx < SOUND_EFFECTS + n; sfx++)
         UnloadSound(sfx->sound);
 }
 
@@ -69,13 +69,13 @@ bool SOUND_BGM_ON = true;
 
 // -----------------------------------------------------------------------------
 void load_bg_music(unsigned int n) {
-    for (BGMusic* bgm = BGM_TRACKS; bgm < BGM_TRACKS + n; bgm++)
+    for (GarlicBGM* bgm = BGM_TRACKS; bgm < BGM_TRACKS + n; bgm++)
         bgm->music = LoadMusicStream(bgm->path_music);
 }
 
 // -----------------------------------------------------------------------------
 void unload_bg_music(unsigned int n) {
-    for (BGMusic* bgm = BGM_TRACKS; bgm < BGM_TRACKS + n; bgm++)
+    for (GarlicBGM* bgm = BGM_TRACKS; bgm < BGM_TRACKS + n; bgm++)
         UnloadMusicStream(bgm->music);
 }
 
@@ -92,9 +92,9 @@ Music* getp_bg_music(unsigned int idx) {
 
 /////////////////////////////////////////////////////////// CENTERED TEXT
 // -----------------------------------------------------------------------------
-void init_centered_text(CenteredText* ctext) {
-    ctext->text_size = MeasureTextEx(
-        GetFontDefault(), ctext->text, ctext->font_size, 1
+void init_centered_text(GarlicText* text) {
+    text->text_size = MeasureTextEx(
+        GetFontDefault(), text->text, text->font_size, 1
     );
 }
 
@@ -102,7 +102,7 @@ void init_centered_text(CenteredText* ctext) {
 /////////////////////////////////////////////////////////// BUTTON
 // -----------------------------------------------------------------------------
 void init_buttons(unsigned int n) {
-    for (Button* btt = BUTTONS; btt < BUTTONS + n; btt++) {
+    for (GarlicButton* btt = BUTTONS; btt < BUTTONS + n; btt++) {
         btt->active = false;
         btt->hovered = false;
         init_centered_text(&btt->ctext);
@@ -111,7 +111,7 @@ void init_buttons(unsigned int n) {
 
 // -----------------------------------------------------------------------------
 void update_buttons_hover(unsigned int n, Vector2 mouse_pos) {
-    for (Button* btt = BUTTONS; btt < BUTTONS + n; ++btt) {
+    for (GarlicButton* btt = BUTTONS; btt < BUTTONS + n; ++btt) {
         if (!btt->active) {
             btt->hovered = false;
             continue;

@@ -27,12 +27,12 @@ static Texture2D _load_texture_resize(GarlicTexture* gt);
 
 
 /////////////////////////////////////////////////////////// SFX
-typedef struct SoundEffect {
+typedef struct GarlicSFX {
     const char* path_sfx;
     Sound sound;
-} SoundEffect;
+} GarlicSFX;
 
-extern SoundEffect SOUND_EFFECTS[];
+extern GarlicSFX SOUND_EFFECTS[];
 extern bool SOUND_SFX_ON;
 
 void load_sound_effects(unsigned int n);
@@ -42,12 +42,12 @@ void play_sfx_random(unsigned int idx, unsigned int n_variants); // assumes n co
 
 
 /////////////////////////////////////////////////////////// MUSIC
-typedef struct BGMusic {
+typedef struct GarlicBGM {
     const char* path_music;
     Music music;
-} BGMusic;
+} GarlicBGM;
 
-extern BGMusic BGM_TRACKS[];
+extern GarlicBGM BGM_TRACKS[];
 extern bool SOUND_BGM_ON;
 
 void load_bg_music(unsigned int n);
@@ -61,27 +61,28 @@ Music* getp_bg_music(unsigned int idx);
 ////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////// CENTERED TEXT
-typedef struct CenteredText {
+typedef struct GarlicText {
     const char* text;
     int font_size;
     Color color;
     Vector2 text_size; // calculated by init_centered_text()
-} CenteredText;
+} GarlicText;
 
-void init_centered_text(CenteredText* ctext);
+void init_centered_text(GarlicText* text);
+void draw_centered_text(GarlicText* text, float x, float y);
 
 
 /////////////////////////////////////////////////////////// BUTTON
-typedef struct Button {
+typedef struct GarlicButton {
     unsigned int gtex_id; // preferentially a custom enum i.e. "TextureID"
-    CenteredText ctext;
+    GarlicText ctext;
     Vector2 size;
     Vector2 pos;
     bool active;
     bool hovered;
-} Button;
+} GarlicButton;
 
-extern Button BUTTONS[];
+extern GarlicButton BUTTONS[];
 
 void init_buttons(unsigned int n);
 void update_buttons_hover(unsigned int n, Vector2 mouse_pos);

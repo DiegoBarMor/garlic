@@ -112,6 +112,8 @@ def main():
         target.apply_injections(injects)
         target.save()
 
+    print(f">>> GARLIC: Injected {len(targets)} target(s)")
+
 
 ################################################################################
 if __name__ == "__main__":
@@ -122,4 +124,4 @@ if __name__ == "__main__":
 
 
 ################################################################################
-# python3 injector.py ../src ../include inject
+# python3 injector.py ../../src ../../include inject
