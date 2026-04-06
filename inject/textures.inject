@@ -1,0 +1,12 @@
+#GARLIC_INJECT_H
+    TEX_BG,
+    TEX_MENU,
+    TEX_BTT_PAUSE,
+    TEX_BTT_RETRY,
+    TEX_BTT_TEXT,
+#GARLIC_INJECT_C
+    { "assets/textures/bg.png",   VIEWPORT_W, VIEWPORT_H },
+    { "assets/textures/menu.png", BOX_MENU_W, BOX_MENU_H },
+    { "assets/textures/btt_pause.png",   BTT_HEIGHT,     BTT_HEIGHT },
+    { "assets/textures/btt_retry.png",   BTT_HEIGHT,     BTT_HEIGHT },
+    { "assets/textures/btt_text.png",    BTT_MENU_WIDTH, BTT_HEIGHT },
